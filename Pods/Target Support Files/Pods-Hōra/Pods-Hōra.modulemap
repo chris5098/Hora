@@ -1,0 +1,6 @@
+framework module Pods_Ho_ra {
+  umbrella header "Pods-Hōra-umbrella.h"
+
+  export *
+  module * { export * }
+}
