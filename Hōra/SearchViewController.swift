@@ -11,5 +11,6 @@ import SwiftyJSON
 
 class SearchViewController: UIViewController {
     
+    
 }
 

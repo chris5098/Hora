@@ -22,6 +22,7 @@
 		DD344E021F2152150098EDDE /* Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD344E011F2152150098EDDE /* Watch.swift */; };
 		DD344E041F215B7A0098EDDE /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD344E031F215B7A0098EDDE /* SwiftyJSON.framework */; };
 		DD344E061F215B870098EDDE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD344E051F215B870098EDDE /* Alamofire.framework */; };
+		DD344E131F27ABE60098EDDE /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD344E121F27ABE60098EDDE /* ItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		DD344E011F2152150098EDDE /* Watch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watch.swift; sourceTree = "<group>"; };
 		DD344E031F215B7A0098EDDE /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Hōra-gjkkijekntzgifgxnkmhuiemoblg/Build/Products/Debug-iphoneos/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		DD344E051F215B870098EDDE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Hōra-gjkkijekntzgifgxnkmhuiemoblg/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		DD344E121F27ABE60098EDDE /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				DD16731A1F1EC5A800804EBC /* LaunchScreen.storyboard */,
 				DD16731D1F1EC5A800804EBC /* Info.plist */,
 				DD1673151F1EC5A800804EBC /* Ho_ra.xcdatamodeld */,
+				DD344E111F2696AB0098EDDE /* Views */,
 			);
 			path = "Hōra";
 			sourceTree = "<group>";
@@ -123,6 +126,15 @@
 				DD344DF71F211BAE0098EDDE /* SpecificItemViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		DD344E111F2696AB0098EDDE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD344E121F27ABE60098EDDE /* ItemCollectionViewCell.swift */,
+			);
+			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +266,7 @@
 				DD1673111F1EC5A800804EBC /* HomeViewController.swift in Sources */,
 				DD344DFA1F211BE50098EDDE /* CollectionOfItemsViewController.swift in Sources */,
 				DD1673251F1EC69500804EBC /* SearchViewController.swift in Sources */,
+				DD344E131F27ABE60098EDDE /* ItemCollectionViewCell.swift in Sources */,
 				DD344DFE1F211C480098EDDE /* ExploreViewController.swift in Sources */,
 				DD344DF81F211BAE0098EDDE /* SpecificItemViewController.swift in Sources */,
 				DD344DFC1F211C080098EDDE /* FavoriteViewController.swift in Sources */,

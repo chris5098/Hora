@@ -10,8 +10,10 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDataSource {
 
+    @IBOutlet weak var listWatchTableView: UITableView!
+    
     var allWatches: [Watch] = []
     
     override func viewDidLoad() {
@@ -30,8 +32,9 @@ class HomeViewController: UIViewController {
                         
                     }
                     for watch in self.allWatches {
-                        print(watch.brandedName)
+                        print(watch.unbrandedName)
                     }
+                    self.listWatchTableView.reloadData()
                 }
             case .failure(let error):
                 print(error)
@@ -39,6 +42,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func tableView(_ tableView: UITableView,  numberOfRowsInSection section: Int) -> Int {
+        return allWatches.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "watchCellIdentifier", for: indexPath)
+        let row = indexPath.row
+        let watchName = allWatches[row]
+        cell.textLabel?.text = watchName.brandedName
+        return cell
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
