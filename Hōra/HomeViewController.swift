@@ -32,7 +32,7 @@ class HomeViewController: UIViewController, UITableViewDataSource {
                         
                     }
                     for watch in self.allWatches {
-                        print(watch.unbrandedName)
+                        print(watch.brandedName)
                     }
                     self.listWatchTableView.reloadData()
                 }

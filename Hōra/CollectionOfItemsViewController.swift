@@ -16,6 +16,8 @@ class CollectionOfItemsViewController: UIViewController {
     
     var allWatches = [Watch]()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,15 +52,21 @@ class CollectionOfItemsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToWatch" {
+            let indexPath = watchesCollectionView.indexPathsForSelectedItems![0]
+            let watch = allWatches[indexPath.item]
+            let specificItemViewController = segue.destination as! SpecificItemViewController
+            specificItemViewController.watch = watch
+        }
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
 
@@ -73,7 +81,7 @@ extension CollectionOfItemsViewController: UICollectionViewDataSource {
         let watch = allWatches[indexPath.item]
         cell.nameLabel.text = watch.brandedName
         cell.priceLabel.text = watch.priceLabel
-        let imageURL = URL(string: watch.imageName)
+        let imageURL = URL(string: watch.xlargeImageName)
         if let imageURL = imageURL {
             if let imageData = try? Data(contentsOf: imageURL) {
                 cell.watchImageView.image = UIImage(data: imageData)
@@ -84,3 +92,4 @@ extension CollectionOfItemsViewController: UICollectionViewDataSource {
 
     
 }
+
