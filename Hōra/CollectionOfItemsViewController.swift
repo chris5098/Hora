@@ -15,13 +15,15 @@ class CollectionOfItemsViewController: UIViewController {
     @IBOutlet weak var watchesCollectionView: UICollectionView!
     
     var allWatches = [Watch]()
+    var filteredWatches = [Watch]()
+    let searchController = UISearchController(searchResultsController: nil)
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let apiToContact = "https://api.shopstyle.com/api/v2/products?pid=uid5600-39643660-67&fts=mens+watch&offset=0&limit=10"
+        let apiToContact = "https://api.shopstyle.com/api/v2/products?pid=uid5600-39643660-67&fts=mens+watch&offset=5000&limit=50"
         Alamofire.request(apiToContact).validate().responseJSON() { response in
             switch response.result {
             case .success:
@@ -32,19 +34,23 @@ class CollectionOfItemsViewController: UIViewController {
                         self.allWatches.append(Watch(json: item))
                     }
                     /*
-                    for watch in self.allWatches {
-                       print(watch.unbrandedName)
-                    }
-                    */
                     DispatchQueue.main.async {
                         self.watchesCollectionView.reloadData()
                     }
+                    */
                 }
             case .failure(let error):
                 print(error)
             }
         }
-
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.autocorrectionType = .no
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.hidesNavigationBarDuringPresentation = false
+        definesPresentationContext = true
+        navigationItem.titleView = searchController.searchBar
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,18 +73,30 @@ class CollectionOfItemsViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-
+    
+    func filterContentForSearchText(searchText: String) {
+        filteredWatches = allWatches.filter { watch in
+            let trimmedString = searchText.trimmingCharacters(in: CharacterSet.whitespaces).lowercased()
+            if trimmedString.characters.count > 0 {
+                return watch.brandedName.lowercased().hasPrefix(trimmedString)
+            }
+            return false
+        }
+        watchesCollectionView.reloadData()
+    }
 }
 
 extension CollectionOfItemsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allWatches.count
+        return filteredWatches.count
+        //return allWatches.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "watchCellIdentifier", for: indexPath) as! ItemCollectionViewCell
-        let watch = allWatches[indexPath.item]
+        let watch = filteredWatches[indexPath.item]
+        //let watch = allWatches[indexPath.item]
         cell.nameLabel.text = watch.brandedName
         cell.priceLabel.text = watch.priceLabel
         let imageURL = URL(string: watch.xlargeImageName)
@@ -89,7 +107,14 @@ extension CollectionOfItemsViewController: UICollectionViewDataSource {
         }
         return cell
     }
+}
 
+extension CollectionOfItemsViewController: UISearchResultsUpdating {
     
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text {
+            filterContentForSearchText(searchText: text)
+        }
+    }
 }
 
