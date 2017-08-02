@@ -13,7 +13,7 @@ struct Watch {
     let brandedName: String
     let priceLabel: String
     let unbrandedName: String
- 
+    let price: Double
     let largeImageName: String
     let xlargeImageName: String
     let descriptionName: String
@@ -23,6 +23,7 @@ struct Watch {
         self.brandedName = json["brandedName"].stringValue
         self.priceLabel = json["priceLabel"].stringValue
         self.unbrandedName = json["unbrandedName"].stringValue
+        self.price = json["price"].doubleValue
         self.largeImageName = json["image"]["sizes"]["Large"]["url"].stringValue
         self.xlargeImageName = json["image"]["sizes"]["XLarge"]["url"].stringValue
         self.descriptionName = json["description"].stringValue
