@@ -175,9 +175,13 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S7d-1U-Yac">
                                 <rect key="frame" x="49" y="64" width="277" height="29"/>
                                 <segments>
-                                    <segment title="Low to High"/>
-                                    <segment title="High to Low"/>
+                                    <segment title="None"/>
+                                    <segment title="Low To High"/>
+                                    <segment title="High To Low"/>
                                 </segments>
+                                <connections>
+                                    <action selector="tapSegment:" destination="d6f-VK-YFf" eventType="valueChanged" id="qc9-4y-PXZ"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -18,17 +18,19 @@ class CollectionOfItemsViewController: UIViewController {
     
     
     var allWatches = [Watch]()
+    var copyOfAllWatches = [Watch]()
     var filteredWatches = [Watch]()
+    var copyOfFilteredWatches = [Watch]()
     let searchController = UISearchController(searchResultsController: nil)
     var isFiltered = false
-   // var lowToHigh =
-    //var highToLow =
+
 
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let apiToContact = "https://api.shopstyle.com/api/v2/products?pid=uid5600-39643660-67&fts=mens-watches?&fl=p16&offset=0&limit=50"
+        let apiToContact = "https://api.shopstyle.com/api/v2/categories?pid=uid5600-39643660-67"
+        //let apiToContact = "https://api.shopstyle.com/api/v2/products?pid=uid5600-39643660-67&fts=mens-watches?&fl=p16&offset=0&limit=50"
         /*
         let apiToContact = "https://api.shopstyle.com/api/v2/products?pid=uid5600-39643660-67&fts=mens-watch&offset=0&limit=50"
         let apiToContact1 =  "https://api.shopstyle.com/api/v2/products?pid=uid5600-39643660-67&fts=mens-watch&offset=50&limit=50"
@@ -65,6 +67,7 @@ class CollectionOfItemsViewController: UIViewController {
                     for item in items {
                         self.allWatches.append(Watch(json: item))
                     }
+                    self.copyOfAllWatches = self.allWatches
                     /*
                     DispatchQueue.main.async {
                         self.watchesCollectionView.reloadData()
@@ -91,6 +94,26 @@ class CollectionOfItemsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    @IBAction func tapSegment(_ sender: UISegmentedControl) {
+        switch priceRangeSelector.selectedSegmentIndex {
+        case 0:
+             allWatches = copyOfAllWatches
+             filteredWatches = copyOfFilteredWatches
+        case 1:
+             allWatches = allWatches.sorted { $0.price < $1.price }
+             filteredWatches = filteredWatches.sorted { $0.price < $1.price }
+        case 2:
+             allWatches = allWatches.sorted { $0.price > $1.price }
+             filteredWatches = filteredWatches.sorted { $0.price > $1.price }
+
+        default:
+            break
+        }
+        watchesCollectionView.reloadData()
+    }
+    
     
     // MARK: - Navigation
 
@@ -121,15 +144,7 @@ class CollectionOfItemsViewController: UIViewController {
             }
             return false
         }
-        //switch priceRangeSelector.selectedSegmentIndex {
-        //case 0:
-         //   lowToHigh = filteredWatches.sorted { $0.price < $1.price }
-        //case 1:
-          //  highToLow = filteredWatches.sorted { $0.price < $1.price }
-        //default:
-         //   break
-        //r}
-        //filteredWatches = filteredWatches.sorted { $0.price < $1.price }
+        copyOfFilteredWatches = filteredWatches
         watchesCollectionView.reloadData()
     }
 }
